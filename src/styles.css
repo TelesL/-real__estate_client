@@ -1,0 +1,151 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonte global */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fdfdfd;
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden; /* Evitar o scroll horizontal em telas pequenas */
+}
+
+/* Paleta e variáveis */
+:root {
+  --primary-color: #26638d;
+  --secondary-color: #3b7ca3;
+  --accent-color: #e6f2f9;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --text-color: #333;
+  --border-radius: 12px;
+  --transition-speed: 0.3s;
+  --hover-color: #4b7b8c; /* Para o hover de botões */
+}
+
+/* Botão primário */
+button.primary {
+  padding: 10px 16px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+button.primary:hover {
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
+}
+
+/* Comportamento geral */
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Estilo de busca */
+.search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: border-color var(--transition-speed);
+}
+
+.search-input:focus {
+  border-color: var(--primary-color);
+}
+
+.search-button,
+.clear-button {
+  padding: 10px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.search-button:hover,
+.clear-button:hover {
+  background-color: var(--hover-color);
+  transform: scale(1.03);
+}
+
+/* Cards de imóvel */
+.property-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  margin-bottom: 20px;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .property-card {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* Ajuste no tamanho dos botões para telas pequenas */
+  .search-button, .clear-button {
+    width: 100%;
+  }
+
+  /* Ajustes no card de imóvel */
+  .property-card {
+    padding: 15px;
+  }
+
+  .property-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .property-card {
+    margin-right: 0;
+  }
+}
