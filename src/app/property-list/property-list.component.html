@@ -1,0 +1,52 @@
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    placeholder="Buscar por título ou endereço"
+    class="search-input"
+  />
+  <button (click)="onSearch()" [disabled]="isLoading" class="search-button">
+    {{ isLoading ? 'Buscando...' : 'Buscar' }}
+  </button>
+  <button *ngIf="searchQuery" (click)="loadProperties(); searchQuery=''; noResults=false;" class="clear-button">
+    Limpar
+  </button>
+</div>
+
+<p *ngIf="noResults && !isLoading" class="no-results">Nenhum imóvel encontrado com esse termo.</p>
+<p *ngIf="isLoading">Carregando imóveis...</p>
+
+<!-- Lista de imóveis -->
+<div class="property-list">
+  <div *ngFor="let property of properties" class="property-card">
+    <div class="property-card-header">
+      <button (click)="openModal(property)" class="btn-edit">
+        <i class="fas fa-pen"></i> Editar
+      </button>
+      <button (click)="onDelete(property.id!)" class="btn-delete">
+        <i class="fas fa-trash"></i> Excluir
+      </button>
+    </div>
+    <img [src]="property.image_url" alt="Imagem do imóvel" class="property-image" />
+    <h3>{{ property.title }}</h3>
+    <p>{{ property.description }}</p>
+    <p><strong>Preço:</strong> {{ property.price | currency:'BRL' }}</p>
+    <p><strong>Endereço:</strong> {{ property.address }}</p>
+  </div>
+</div>
+
+<!-- Botão Flutuante -->
+<button (click)="openModal()" class="btn-create-property">
+  <i class="fas fa-plus"></i> Criar Imóvel
+</button>
+
+<!-- Modal -->
+<div *ngIf="modalOpen" class="modal-overlay">
+  <div class="modal">
+    <app-property-editor
+      [property]="selectedProperty"
+      (save)="saveProperty($event)"
+      (cancel)="closeModal()"
+    ></app-property-editor>
+  </div>
+</div>
